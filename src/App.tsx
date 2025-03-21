@@ -1,36 +1,11 @@
 import { useState } from 'react';
 import './App.css';
 import { Button } from './components/button';
-type Question = {
-  question: string,
-  answer: string,
-  selected?: 'known' | 'unknown'
-}
+import './components/button/button.css';
+import { data } from './data/questions';
+import { ProgressBadge } from './components/progress-badge';
 
-type Data = Question[];
 
-const data: Data = [
-  {
-    question : 'What is React?',
-    answer: 'UI library'
-  },
-  {
-    question : 'What is HTML?',
-    answer: 'Markup language'
-  },
-  {
-    question : 'What is HTTP?',
-    answer: 'Networking protocol'
-  },
-  {
-    question : 'What is JSX?',
-    answer: 'Format for dynamic rendering HTML'
-  },
-  {
-    question : 'Who\'s Erokez?',
-    answer: 'Cool guy'
-  }
-]
 function App() {
   const [questions, setQuestions] = useState(data)
   const [questionIx, setQuestionIx] = useState(0)

@@ -1,0 +1,10 @@
+.progress-button {
+    background-color: transparent;
+    padding: 0.5rem;
+  }
+  .button-selected {
+    background-color: rgb(39, 176, 185);
+    font-weight: bold;
+    user-select: none;
+    color: white;
+  }
