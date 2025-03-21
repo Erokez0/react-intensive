@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.progress-button {
+  background-color: transparent;
+  padding: 0.5rem;
+}
+.button-selected {
+  background-color: rgb(39, 176, 185);
+  font-weight: bold;
+  user-select: none;
+  color: white;
+}
