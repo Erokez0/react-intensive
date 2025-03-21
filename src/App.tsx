@@ -14,6 +14,20 @@ function App() {
   const [unknownQuestions, setUnknownQuestions] = useState(0);
   const [skippedQuestions, setSkippedQuestions] = useState(0);
   const [totalQuestions] = useState(data.length)
+
+  useEffect(() => {
+
+    for (const question of Object.values(questions)) {
+      if (question.selected === 'known') {
+        setKnownQuestions(knownQuestions => knownQuestions + 1)
+      } else if (question.selected === 'unknown') {
+        setUnknownQuestions(unknownQuestions => unknownQuestions + 1)
+      } else {
+        setSkippedQuestions(skippedQuestions => skippedQuestions + 1)
+      }
+    }
+  }, [questionIx, questions])
+
   const onProgressButtonClick = (operation: 'plus' | 'minus') => {
     setQuestionIx(current => operation == "plus"? current + 1 : current - 1)
   }
