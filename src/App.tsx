@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-
+import { Button } from './components/button';
 type Question = {
   question: string,
   answer: string,
@@ -8,26 +8,6 @@ type Question = {
 }
 
 type Data = Question[];
-interface IButton {
-  type: 'progress' | 'main',
-  onClick: () => void,
-  classNames?: string[],
-  text: string
-
-}
-function Button({type, onClick, classNames, text}): IButton {
-  if (type == 'progress') {
-    return <button 
-      className={'progress-button'+classNames.join(' ')} 
-      onClick={onClick}>{text}
-      </button>
-  } else if (type === 'main') {
-    return <button 
-      className={'button-main'+classNames.join(' ')} 
-      onClick={onClick}>{text}
-      </button>
-  }
-}
 
 const data: Data = [
   {
@@ -45,6 +25,10 @@ const data: Data = [
   {
     question : 'What is JSX?',
     answer: 'Format for dynamic rendering HTML'
+  },
+  {
+    question : 'Who\'s Erokez?',
+    answer: 'Cool guy'
   }
 ]
 function App() {
@@ -68,13 +52,13 @@ function App() {
         <section className="progress">
           <progress className="progress-bar" value={1/totalQuestions*(questionIx+1)}></progress>
           {questionIx >= 1 && 
-          <button className="progress-button"
-            onClick={ () => onProgressButtonClick("minus")}>&lt;</button>
+          <Button type="progress" 
+            onClick={ () => onProgressButtonClick("minus")} text="&lt;" />
           }
           <span className="progress-text">{questionIx+1} / {totalQuestions}</span>
           {questionIx < totalQuestions - 1 &&
-          <button className="progress-button" 
-            onClick={ () => onProgressButtonClick("plus")}>&gt;</button>
+          <Button type="progress" 
+          onClick={ () => onProgressButtonClick("plus")} text="&gt;" />
           }
         </section>
       </header>
@@ -83,17 +67,23 @@ function App() {
         <article className="answer">{data[questionIx].answer}</article>
 
         <section className="main-buttons">
-          <button 
-          className={ questions[questionIx].selected == "known" 
-            ? 'main-button button-selected' 
-            : 'main-button'} 
-          onClick={ () => onMainButtonCLick("known") }>I KNEW IT 🙏</button>
-          <button className={ questions[questionIx].selected == "unknown" 
-            ? 'main-button button-selected' 
-            : 'main-button'} 
-          onClick={ () => onMainButtonCLick("unknown") }>Idk 😭</button>
-          <button className="main-button" 
-          onClick={ () => onProgressButtonClick("plus") }>Skip 🎿</button>
+          <Button classNames={ 
+            questions[questionIx].selected == "known" 
+            ? ['button-selected']
+            : []
+            } 
+            onClick={ () => onMainButtonCLick("known")} 
+            text="I KNEW IT 🙏" type='main'/>
+
+          <Button classNames={ 
+            questions[questionIx].selected == "unknown" 
+            ? ['button-selected']
+            : []
+            } 
+            onClick={ () => onMainButtonCLick("unknown")} 
+            text="IDK 😭" type='main'/>
+
+          <Button type='main' onClick={ () => onProgressButtonClick("plus") } text='Skip 🎿'/>
         </section>
       </main>
     </div>
