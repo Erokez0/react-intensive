@@ -1,0 +1,19 @@
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+} 
+.badge-icon {
+    height: 1rem;
+}
+.badge-label {
+    line-height: 1rem;
+}
+.badge-value {
+    font-weight: bold;
+    background-color: gray;
+    border-radius: 8px;
+    padding: 2px 4px;
+    font-size: 0.8rem;
+}

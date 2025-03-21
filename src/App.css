@@ -4,3 +4,9 @@
   padding: 2rem;
   text-align: center;
 }
+.badges {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 16px;
+}

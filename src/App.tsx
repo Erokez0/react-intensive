@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { Button } from './components/button';
 import './components/button/button.css';
 import { data } from './data/questions';
 import { ProgressBadge } from './components/progress-badge';
-
+import reactIcon from './assets/react.svg'
+import './components/progress-badge/progress-badge.css';
 
 function App() {
-  const [questions, setQuestions] = useState(data)
-  const [questionIx, setQuestionIx] = useState(0)
-  const [totalQuestions /*, setTotalQuestions*/] = useState(data.length)
+  const [questions, setQuestions] = useState(data);
+  const [questionIx, setQuestionIx] = useState(0);
+  const [knownQuestions, setKnownQuestions] = useState(0);
+  const [unknownQuestions, setUnknownQuestions] = useState(0);
+  const [skippedQuestions, setSkippedQuestions] = useState(0);
+  const [totalQuestions] = useState(data.length)
   const onProgressButtonClick = (operation: 'plus' | 'minus') => {
     setQuestionIx(current => operation == "plus"? current + 1 : current - 1)
   }
@@ -19,7 +23,7 @@ function App() {
       const newState = {...questions};
       newState[questionIx].selected = type
       return newState
-    })
+    });
   }
   return (
     <div>
@@ -36,6 +40,13 @@ function App() {
           onClick={ () => onProgressButtonClick("plus")} text="&gt;" />
           }
         </section>
+
+        <section className="badges">
+          <ProgressBadge icon={reactIcon} label='Knew ' value={knownQuestions} />
+          <ProgressBadge icon={reactIcon} label='Learnt ' value={unknownQuestions} />
+          <ProgressBadge icon={reactIcon} label='Skipped ' value={skippedQuestions} />
+        </section>
+
       </header>
       <main className='main'>
         <article className="question">{data[questionIx].question}</article>
