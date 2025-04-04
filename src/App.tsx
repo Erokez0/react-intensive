@@ -12,7 +12,7 @@ function App() {
   const [totalQuestions] = useState(data.length)
 
   const {questions, questionIx, knownQuestions, unknownQuestions, skippedQuestions, setKnownQuestions} = useStore();
-
+  
 
   useEffect(() => {
     const newState = {

@@ -9,7 +9,8 @@ interface Store {
     totalQuestions: number,
     setKnownQuestions: () => void,
     setUnknownQuestions: () => void,
-    setSkippedQuestions: () => void
+    setSkippedQuestions: () => void,
+    setQuestionIx: (ix: number) => void
 }
 
 export const useStore = create<Store>()((set) => ({
@@ -22,5 +23,6 @@ export const useStore = create<Store>()((set) => ({
 
     setKnownQuestions: () => set(state => ({knownQuestions: state.knownQuestions + 1}) ),
     setUnknownQuestions: () => set(state => ({unknownQuestions: state.unknownQuestions + 1}) ),
-    setSkippedQuestions: () => set(state => ({skippedQuestions: state.skippedQuestions + 1}) )
+    setSkippedQuestions: () => set(state => ({skippedQuestions: state.skippedQuestions + 1}) ),
+    setQuestionIx: (index: number) => set(() => ({questionIx: index}) )
 }));
