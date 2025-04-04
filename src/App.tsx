@@ -1,44 +1,28 @@
-import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import './App.css';
 import { Button } from './components/button';
 import './components/button/button.module.css';
-import { data } from './data/questions';
 import { ProgressBadge } from './components/progress-badge';
 import reactIcon from './assets/react.svg'
 import buttonStyles from './components/button/button.module.css';
 import { useStore } from './store';
 function App() {
-  const [totalQuestions] = useState(data.length)
 
-  const {questions, questionIx, knownQuestions, unknownQuestions, skippedQuestions, setKnownQuestions} = useStore();
+  const {
+    questions, 
+    questionIx, 
+    setQuestionIx, 
+    updateQuestion,
+    stats
+    } = useStore();
   
-
-  useEffect(() => {
-    const newState = {
-      'known': 0,
-      'unknown': 0,
-      'skipped': 0
-    }
-    for (const question of Object.values(questions)) {
-      if (question.selected) {
-        newState[question.selected] += 1;
-      }
-    }
-    setKnownQuestions(newState.known);
-    setUnknownQuestions(newState.unknown);
-    setSkippedQuestions(newState.skipped);
-  }, [questions])
+  const totalQuestions = questions.length;
 
   const onProgressButtonClick = (operation: 'plus' | 'minus') => {
-    setQuestionIx(current => operation == "plus"? current + 1 : current - 1)
+    setQuestionIx(operation == 'plus' ? questionIx + 1 : questionIx - 1)
   }
   const onMainButtonCLick = (type: 'known' | 'unknown' | 'skipped') => {
-    setQuestions( questions => {
-      const newState = {...questions};
-      newState[questionIx].selected = type
-      return newState
-    });
+    updateQuestion(type)
     onProgressButtonClick("plus");
   }
   return (
@@ -58,15 +42,15 @@ function App() {
         </section>
 
         <section className="badges">
-          <ProgressBadge icon={reactIcon} label='Knew ' value={knownQuestions} />
-          <ProgressBadge icon={reactIcon} label='Learnt ' value={unknownQuestions} />
-          <ProgressBadge icon={reactIcon} label='Skipped ' value={skippedQuestions} />
+          <ProgressBadge icon={reactIcon} label='Knew ' value={stats.known} />
+          <ProgressBadge icon={reactIcon} label='Learnt ' value={stats.unknown} />
+          <ProgressBadge icon={reactIcon} label='Skipped ' value={stats.skipped} />
         </section>
 
       </header>
       <main className='main'>
-        <article className="question">{data[questionIx].question}</article>
-        <article className="answer">{data[questionIx].answer}</article>
+        <article className="question">{questions[questionIx].question}</article>
+        <article className="answer">{questions[questionIx].answer}</article>
 
         <section className="main-buttons">
           <Button 
