@@ -1,6 +1,6 @@
 export interface IButton {
     type: 'progress' | 'main',
     onClick: () => void,
-    classNames?: string[],
+    classNames?: string,
     text: string
 }

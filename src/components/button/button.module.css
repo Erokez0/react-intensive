@@ -1,0 +1,21 @@
+.progress-button {
+  background-color: transparent;
+  padding: 0.5rem;
+}
+
+.button-main {
+  padding: 0.6em 1.2em;
+  outline-color: transparent;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
+.button-selected {
+  background-color: rgb(39, 176, 185);
+  font-weight: bold;
+  user-select: none;
+  color: white;
+}

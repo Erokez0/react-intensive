@@ -1,14 +1,16 @@
 import type { IButton } from "./button.types"
-export function Button ({type, onClick, classNames, text}: IButton  ){
+import styles from './button.module.css';
+import clsx from "clsx";
+export function Button ({type, onClick, classNames = '', text}: IButton  ){
     if (type == 'progress') {
-      return <button 
-        className={'progress-button ' + classNames?.join(' ')} 
+      return (<button 
+        className={clsx([styles['progress-button'], classNames ])} 
         onClick={onClick}>{text}
-        </button>
+        </button>)
     } else if (type === 'main') {
-      return <button 
-        className={'button-main ' + classNames?.join(' ')} 
+      return (<button 
+        className={clsx([styles['button-main'], ...classNames])} 
         onClick={onClick}>{text}
-        </button>
+        </button>)
     }
   }

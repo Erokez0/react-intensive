@@ -1,10 +1,10 @@
-type Question = {
+export type Question = {
     question: string,
     answer: string,
-    selected?: 'known' | 'unknown'
+    selected?: 'known' | 'unknown' | 'skipped'
   }
 
-type Data = Question[];
+export type Data = Question[];
 
 export const data: Data = [
   {
